@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1663478532343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1663478532343,
+            "name": "Commit-0",
+            "content": "// 导入配置文件\nconst config = require(\"./config\")\nconst cors = require(\"cors\")\nconst morgan = require(\"morgan\")\n\nconst express = require(\"express\")\nconst app = express()\n\n// 处理中间件\n// 处理json的中间件\napp.use(express.json())\n// 处理跨域\napp.use(cors())\n// 处理日志\napp.use(morgan(\"dev\"))\n\n// 引入数据库\nrequire(\"./model\")\n// 引入路由中间件\napp.use(\"/api\",require(\"./routes\"))\n\n// 引入错误处理中间键\napp.use(require(\"./middleware/error\"))\n\napp.listen(config.app.port,() => [\n    console.log(`Running at http://localhost:${config.app.port}`)\n])"
+        }
+    ]
+}

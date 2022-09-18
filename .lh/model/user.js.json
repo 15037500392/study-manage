@@ -1,0 +1,86 @@
+{
+    "sourceFile": "model/user.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1663462183925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663464005065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,10 @@\n     password:{\n         type: String,\n         require: true,\n         minlength: 6,\n-        maxlength: 16\n+        maxlength: 16,\n+        select: false\n     }\n \n })\n \n"
+                },
+                {
+                    "date": 1663464052839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,13 @@\n         require: true,\n         minlength: 6,\n         maxlength: 16,\n         select: false\n+    },\n+    // 隐藏版本信息\n+    _v:{\n+        type: Number,\n+        select: false\n     }\n \n })\n \n"
+                },
+                {
+                    "date": 1663464060733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         maxlength: 16,\n         select: false\n     },\n     // 隐藏版本信息\n-    _v:{\n+    __v:{\n         type: Number,\n         select: false\n     }\n \n"
+                },
+                {
+                    "date": 1663464657867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n const mongoose =  require('mongoose')\n \n+// 引入joi\n+const Joi = require(\"joi\")\n+\n // 定义user结构\n const userSchema = new mongoose.Schema({\n     // 邮箱\n     email:{\n@@ -35,8 +38,19 @@\n \n // 创建model\n const User = mongoose.model(\"user\",userSchema)\n \n+// 创建内容检验规则对象\n+function userValidator(data) {\n+    const schema = Joi.object({\n+        email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n+        name: Joi.string().min(2).maxlength(20).required(),\n+        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n+        _id: Joi.objectId()\n+    })\n+\n+    return schema.validate(data)\n+}\n // 导出model\n module.exports = {\n     User\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663464731576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,6 +51,7 @@\n     return schema.validate(data)\n }\n // 导出model\n module.exports = {\n-    User\n+    User,\n+    userValidator\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663464874339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n // 创建内容检验规则对象\n function userValidator(data) {\n     const schema = Joi.object({\n         email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n-        name: Joi.string().min(2).maxlength(20).required(),\n+        name: Joi.string().min(2).max(20).required(),\n         password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n         _id: Joi.objectId()\n     })\n \n"
+                },
+                {
+                    "date": 1663464961846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,8 @@\n     const schema = Joi.object({\n         email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n         name: Joi.string().min(2).max(20).required(),\n         password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n-        _id: Joi.objectId()\n     })\n \n     return schema.validate(data)\n }\n"
+                },
+                {
+                    "date": 1663465091133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n const mongoose =  require('mongoose')\n \n // 引入joi\n const Joi = require(\"joi\")\n+const JoiId = require(\"joi-objectid\")\n \n // 定义user结构\n const userSchema = new mongoose.Schema({\n     // 邮箱\n@@ -44,8 +45,9 @@\n     const schema = Joi.object({\n         email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n         name: Joi.string().min(2).max(20).required(),\n         password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n+        _id: JoiId.objectId()\n     })\n \n     return schema.validate(data)\n }\n"
+                },
+                {
+                    "date": 1663465133641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,8 @@\n     const schema = Joi.object({\n         email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n         name: Joi.string().min(2).max(20).required(),\n         password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n-        _id: JoiId.objectId()\n     })\n \n     return schema.validate(data)\n }\n"
+                },
+                {
+                    "date": 1663465595730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n const mongoose =  require('mongoose')\n \n // 引入joi\n const Joi = require(\"joi\")\n-const JoiId = require(\"joi-objectid\")\n+Joi.objectId = require('joi-objectid')(Joi)\n \n // 定义user结构\n const userSchema = new mongoose.Schema({\n     // 邮箱\n@@ -45,8 +45,9 @@\n     const schema = Joi.object({\n         email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n         name: Joi.string().min(2).max(20).required(),\n         password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n+        _id: Joi.objectId()\n     })\n \n     return schema.validate(data)\n }\n"
+                },
+                {
+                    "date": 1663475760298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,11 +42,26 @@\n \n // 创建内容检验规则对象\n function userValidator(data) {\n     const schema = Joi.object({\n-        email: Joi.string().email().trim().lowercase().min(6).max(30).required(),\n-        name: Joi.string().min(2).max(20).required(),\n-        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required(),\n+        email: Joi.string().email().trim().lowercase().min(6).max(30).required().message({\n+            \"any.required\": \"缺少必选参数 email\",\n+            \"string.email\": \"email格式错误\",\n+            \"string.min\": \"email最少为6个字符\",\n+            \"string.max\": \"email最多为30个字符\"\n+        }),\n+        name: Joi.string().min(2).max(20).required().message({\n+            \"any.required\": \"缺少必选参数 name\",\n+            \"string.email\": \"name格式错误\",\n+            \"string.min\": \"name最少为2个字符\",\n+            \"string.max\": \"name最多为20个字符\"\n+        }),\n+        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required().message({\n+            \"any.required\": \"缺少必选参数 password\",\n+            \"string.email\": \"password格式错误\",\n+            \"string.min\": \"password最少为6个字符\",\n+            \"string.max\": \"password最多为16个字符\"\n+        }),\n         _id: Joi.objectId()\n     })\n \n     return schema.validate(data)\n"
+                },
+                {
+                    "date": 1663475842216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,15 +50,15 @@\n             \"string.max\": \"email最多为30个字符\"\n         }),\n         name: Joi.string().min(2).max(20).required().message({\n             \"any.required\": \"缺少必选参数 name\",\n-            \"string.email\": \"name格式错误\",\n+            \"string.base\": \"name格式错误\",\n             \"string.min\": \"name最少为2个字符\",\n             \"string.max\": \"name最多为20个字符\"\n         }),\n         password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required().message({\n             \"any.required\": \"缺少必选参数 password\",\n-            \"string.email\": \"password格式错误\",\n+            \"string.pattern.base\": \"password格式错误\",\n             \"string.min\": \"password最少为6个字符\",\n             \"string.max\": \"password最多为16个字符\"\n         }),\n         _id: Joi.objectId()\n"
+                },
+                {
+                    "date": 1663475886600,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,21 +42,21 @@\n \n // 创建内容检验规则对象\n function userValidator(data) {\n     const schema = Joi.object({\n-        email: Joi.string().email().trim().lowercase().min(6).max(30).required().message({\n+        email: Joi.string().email().trim().lowercase().min(6).max(30).required().messages({\n             \"any.required\": \"缺少必选参数 email\",\n             \"string.email\": \"email格式错误\",\n             \"string.min\": \"email最少为6个字符\",\n             \"string.max\": \"email最多为30个字符\"\n         }),\n-        name: Joi.string().min(2).max(20).required().message({\n+        name: Joi.string().min(2).max(20).required().messages({\n             \"any.required\": \"缺少必选参数 name\",\n             \"string.base\": \"name格式错误\",\n             \"string.min\": \"name最少为2个字符\",\n             \"string.max\": \"name最多为20个字符\"\n         }),\n-        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required().message({\n+        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required().messages({\n             \"any.required\": \"缺少必选参数 password\",\n             \"string.pattern.base\": \"password格式错误\",\n             \"string.min\": \"password最少为6个字符\",\n             \"string.max\": \"password最多为16个字符\"\n"
+                },
+                {
+                    "date": 1663477532552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n             \"string.base\": \"name格式错误\",\n             \"string.min\": \"name最少为2个字符\",\n             \"string.max\": \"name最多为20个字符\"\n         }),\n-        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required().messages({\n+        password: Joi.string().pattern(/^[a-zA-Z0-9]{6,16}$/).required().messages ({\n             \"any.required\": \"缺少必选参数 password\",\n             \"string.pattern.base\": \"password格式错误\",\n             \"string.min\": \"password最少为6个字符\",\n             \"string.max\": \"password最多为16个字符\"\n"
+                },
+                {
+                    "date": 1663480311693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n     password:{\n         type: String,\n         require: true,\n         minlength: 6,\n-        maxlength: 16,\n+        maxlength: 1000,\n         select: false\n     },\n     // 隐藏版本信息\n     __v:{\n"
+                },
+                {
+                    "date": 1663487339470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,10 @@\n+// 引入配置文件\n+const config = require(\"../config\")\n+\n+// 引入 jwt\n+const jwt = require(\"jsonwebtoken\")\n+\n const mongoose =  require('mongoose')\n \n // 引入joi\n const Joi = require(\"joi\")\n@@ -36,8 +42,18 @@\n     }\n \n })\n \n+// 封装生成token的功能\n+userSchema.methods.generateToken = function() {\n+    return jwt.sign({\n+        _id: this._id\n+    },\n+    config.secret,\n+    { expiresIn: '10d'}\n+    )\n+}\n+\n // 创建model\n const User = mongoose.model(\"user\",userSchema)\n \n // 创建内容检验规则对象\n"
+                },
+                {
+                    "date": 1663491911204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,30 @@\n     })\n \n     return schema.validate(data)\n }\n+\n+// 创建内容检验规则对象\n+function updateValidator(data) {\n+    const schema = Joi.object({\n+        email: Joi.string().email().trim().lowercase().min(6).max(30).required().messages({\n+            \"any.required\": \"缺少必选参数 email\",\n+            \"string.email\": \"email格式错误\",\n+            \"string.min\": \"email最少为6个字符\",\n+            \"string.max\": \"email最多为30个字符\"\n+        }),\n+        name: Joi.string().min(2).max(20).required().messages({\n+            \"any.required\": \"缺少必选参数 name\",\n+            \"string.base\": \"name格式错误\",\n+            \"string.min\": \"name最少为2个字符\",\n+            \"string.max\": \"name最多为20个字符\"\n+        })\n+    })\n+\n+    return schema.validate(data)\n+}\n // 导出model\n module.exports = {\n     User,\n-    userValidator\n+    userValidator,\n+    updateValidator\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1663462183925,
+            "name": "Commit-0",
+            "content": "const mongoose =  require('mongoose')\n\n// 定义user结构\nconst userSchema = new mongoose.Schema({\n    // 邮箱\n    email:{\n        type: String,\n        require: true,\n        minlength: 6,\n        maxlength: 30,\n        unique: true\n    },\n    // 用户名\n    name:{\n        type: String,\n        require: true,\n        minlength: 2,\n        maxlength: 20,\n    },\n    // 密码\n    password:{\n        type: String,\n        require: true,\n        minlength: 6,\n        maxlength: 16\n    }\n\n})\n\n// 创建model\nconst User = mongoose.model(\"user\",userSchema)\n\n// 导出model\nmodule.exports = {\n    User\n}"
+        }
+    ]
+}

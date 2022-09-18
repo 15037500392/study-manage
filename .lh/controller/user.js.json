@@ -1,0 +1,150 @@
+{
+    "sourceFile": "controller/user.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 33,
+            "patches": [
+                {
+                    "date": 1663477358104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663477553036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n \n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n-        res.send(\"获取所有用户\")\n+        console.log(res,'res')\n+        res.send(res)\n     } catch (err) {\n         next\n     }\n }\n"
+                },
+                {
+                    "date": 1663477608771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n         console.log(res,'res')\n-        res.send(res)\n+        res.send(\"ee\")\n     } catch (err) {\n         next\n     }\n }\n"
+                },
+                {
+                    "date": 1663477699642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,11 @@\n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n         console.log(res,'res')\n-        res.send(\"ee\")\n+        res.send(\"eec\")\n     } catch (err) {\n-        next\n+        next()\n     }\n }\n \n // 获取指定用户\n"
+                },
+                {
+                    "date": 1663477911180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+const { User, userValidator } = require(\"../model/user\")\n+const user =  new User()\n // 注册用户\n exports.register = (req, res, next) => {\n     try {\n         res.send(\"注册用户\")\n@@ -9,10 +11,10 @@\n \n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n-        console.log(res,'res')\n-        res.send(\"eec\")\n+        \n+        res.send(user.find())\n     } catch (err) {\n         next()\n     }\n }\n"
+                },
+                {
+                    "date": 1663477917342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,8 @@\n \n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n-        \n         res.send(user.find())\n     } catch (err) {\n         next()\n     }\n"
+                },
+                {
+                    "date": 1663477967963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n \n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n+        console.log(\"jin\")\n         res.send(user.find())\n     } catch (err) {\n         next()\n     }\n"
+                },
+                {
+                    "date": 1663478977843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,47 +1,46 @@\n const { User, userValidator } = require(\"../model/user\")\n-const user =  new User()\n+// const user =  new User()\n // 注册用户\n exports.register = (req, res, next) => {\n     try {\n         res.send(\"注册用户\")\n     } catch (err) {\n-        next\n+        next(err)\n     }\n }\n \n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n-        console.log(\"jin\")\n-        res.send(user.find())\n+        res.send(\"获取所有用户\")\n     } catch (err) {\n-        next()\n+        next(err)\n     }\n }\n \n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n         res.send(\"获取指定用户\")\n     } catch (err) {\n-        next\n+        next(err)\n     }\n }\n \n // 编辑/修改指定用户\n exports.update = (req, res, next) => {\n     try {\n         res.send(\"编辑/修改指定用户\")\n     } catch (err) {\n-        next\n+        next(err)\n     }\n }\n \n // 删除用户\n exports.delete = (req, res, next) => {\n     try {\n         res.send(\"删除用户\")\n     } catch (err) {\n-        next\n+        next(err)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663479088700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n         res.send(\"获取指定用户\")\n+        throw('ee')\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663479099497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n         res.send(\"获取指定用户\")\n-        throw('ee')\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663479212741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n // const user =  new User()\n // 注册用户\n exports.register = (req, res, next) => {\n     try {\n-        res.send(\"注册用户\")\n+       console.log(req,'hahah')\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663479758626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,24 @@\n const { User, userValidator } = require(\"../model/user\")\n-// const user =  new User()\n // 注册用户\n-exports.register = (req, res, next) => {\n+exports.register = async (req, res, next) => {\n     try {\n        console.log(req,'hahah')\n+       const { email } = req.validValue\n+       // 1.查询邮箱是否已经被注册过\n+       let user = await User.findOne({ email })\n+\n+       // 2.检测是否存在获取到的用户信息\n+       if (user){\n+            return res.status(400).json({\n+                code: 400,\n+                msg: \"邮箱已经被注册了,请重新输入\",\n+                data: { email}\n+            })\n+       }\n+       res.send('注册成功')\n+\n+\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663480314873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n+const bcrypt = require(\"bcrypt\")\n const { User, userValidator } = require(\"../model/user\")\n // 注册用户\n exports.register = async (req, res, next) => {\n     try {\n        console.log(req,'hahah')\n-       const { email } = req.validValue\n+       const { email,password,name } = req.validValue\n        // 1.查询邮箱是否已经被注册过\n        let user = await User.findOne({ email })\n \n        // 2.检测是否存在获取到的用户信息\n@@ -14,11 +15,28 @@\n                 msg: \"邮箱已经被注册了,请重新输入\",\n                 data: { email}\n             })\n        }\n-       res.send('注册成功')\n+       \n+       // 加密\n+       const salt = await bcrypt.genSalt(10);\n+       password = await bcrypt.hash(password,salt)\n \n+       // 创建实例\n+       user =  new User({\n+        email,\n+        password,\n+        name\n+       })\n \n+       await user.save()\n+\n+        res.status(200).json({\n+                code: 200,\n+                msg: \"注册成功\",\n+                data: { email}\n+        })\n+\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663480377082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n const { User, userValidator } = require(\"../model/user\")\n // 注册用户\n exports.register = async (req, res, next) => {\n     try {\n-       console.log(req,'hahah')\n-       const { email,password,name } = req.validValue\n+       const { email,name } = req.validValue\n+       let password = req.validValue.password\n        // 1.查询邮箱是否已经被注册过\n        let user = await User.findOne({ email })\n \n        // 2.检测是否存在获取到的用户信息\n"
+                },
+                {
+                    "date": 1663489113991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,14 @@\n \n // 获取所有用户\n exports.getUserList = (req, res, next) => {\n     try {\n-        res.send(\"获取所有用户\")\n+        let userList = await User.find()\n+        res.status(200).json({\n+            code: 200,\n+            msg: \"操作成功\",\n+            data: userList\n+    })\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663489120283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     }\n }\n \n // 获取所有用户\n-exports.getUserList = (req, res, next) => {\n+exports.getUserList = async (req, res, next) => {\n     try {\n         let userList = await User.find()\n         res.status(200).json({\n             code: 200,\n"
+                },
+                {
+                    "date": 1663489215967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,15 @@\n \n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n-        res.send(\"获取指定用户\")\n+        console.log(req.query,'dd')\n+        // let userList = await User.findOne()\n+        // res.status(200).json({\n+        //     code: 200,\n+        //     msg: \"操作成功\",\n+        //     data: userList\n+        // })\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663489306055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n \n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n-        console.log(req.query,'dd')\n+        console.log(req,'dd')\n         // let userList = await User.findOne()\n         // res.status(200).json({\n         //     code: 200,\n         //     msg: \"操作成功\",\n"
+                },
+                {
+                    "date": 1663489314801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,8 +58,9 @@\n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n         console.log(req,'dd')\n+        res.send('ok')\n         // let userList = await User.findOne()\n         // res.status(200).json({\n         //     code: 200,\n         //     msg: \"操作成功\",\n"
+                },
+                {
+                    "date": 1663489556959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,16 +57,26 @@\n \n // 获取指定用户\n exports.getUserById = (req, res, next) => {\n     try {\n-        console.log(req,'dd')\n+        console.log(req.params.id,'dd')\n+        const { id } = req.params\n         res.send('ok')\n-        // let userList = await User.findOne()\n-        // res.status(200).json({\n-        //     code: 200,\n-        //     msg: \"操作成功\",\n-        //     data: userList\n-        // })\n+        let user= await User.findOne({ _id: id})\n+        if(!user){\n+            return res.status(400).json({\n+                code: 400,\n+                msg: \"用户不存在\",\n+                data: null\n+            })\n+        }\n+\n+        res.status(200).json({\n+            code: 200,\n+            msg: \"用户不存在\",\n+            data: user\n+        })\n+        \n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663489568534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     }\n }\n \n // 获取指定用户\n-exports.getUserById = (req, res, next) => {\n+exports.getUserById = async (req, res, next) => {\n     try {\n         console.log(req.params.id,'dd')\n         const { id } = req.params\n         res.send('ok')\n"
+                },
+                {
+                    "date": 1663489600473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,8 @@\n exports.getUserById = async (req, res, next) => {\n     try {\n         console.log(req.params.id,'dd')\n         const { id } = req.params\n-        res.send('ok')\n         let user= await User.findOne({ _id: id})\n         if(!user){\n             return res.status(400).json({\n                 code: 400,\n"
+                },
+                {
+                    "date": 1663489618753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n         }\n \n         res.status(200).json({\n             code: 200,\n-            msg: \"用户不存在\",\n+            msg: \"操作成功\",\n             data: user\n         })\n         \n     } catch (err) {\n"
+                },
+                {
+                    "date": 1663489783203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n exports.getUserById = async (req, res, next) => {\n     try {\n         console.log(req.params.id,'dd')\n         const { id } = req.params\n-        let user= await User.findOne({ _id: id})\n+        let user= await User.findById(id)\n         if(!user){\n             return res.status(400).json({\n                 code: 400,\n                 msg: \"用户不存在\",\n"
+                },
+                {
+                    "date": 1663490096316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,13 @@\n \n // 编辑/修改指定用户\n exports.update = (req, res, next) => {\n     try {\n-        res.send(\"编辑/修改指定用户\")\n+        let userId = req.params.id\n+        let body = req.body\n+        console.log(body,'dhdh')\n+        // 1.查询用户\n+        const data = await User.findByIdAndUpdate(userId,body)\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663490105812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n     }\n }\n \n // 编辑/修改指定用户\n-exports.update = (req, res, next) => {\n+exports.update = async (req, res, next) => {\n     try {\n         let userId = req.params.id\n         let body = req.body\n         console.log(body,'dhdh')\n"
+                },
+                {
+                    "date": 1663490283583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,8 +87,9 @@\n         let body = req.body\n         console.log(body,'dhdh')\n         // 1.查询用户\n         const data = await User.findByIdAndUpdate(userId,body)\n+        next()\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663490457523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n         let userId = req.params.id\n         let body = req.body\n         console.log(body,'dhdh')\n         // 1.查询用户\n-        const data = await User.findByIdAndUpdate(userId,body)\n+        // const data = await User.findByIdAndUpdate(userId,body)\n         next()\n     } catch (err) {\n         next(err)\n     }\n"
+                },
+                {
+                    "date": 1663490591061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,9 @@\n         let body = req.body\n         console.log(body,'dhdh')\n         // 1.查询用户\n         // const data = await User.findByIdAndUpdate(userId,body)\n-        next()\n+        // next()\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663490623205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,9 @@\n         let body = req.body\n         console.log(body,'dhdh')\n         // 1.查询用户\n         // const data = await User.findByIdAndUpdate(userId,body)\n-        // next()\n+        next()\n     } catch (err) {\n         next(err)\n     }\n }\n"
+                },
+                {
+                    "date": 1663490647324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n     }\n }\n \n // 编辑/修改指定用户\n-exports.update = async (req, res, next) => {\n+exports.updateUser = async (req, res, next) => {\n     try {\n         let userId = req.params.id\n         let body = req.body\n         console.log(body,'dhdh')\n"
+                },
+                {
+                    "date": 1663490682693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,10 @@\n         let userId = req.params.id\n         let body = req.body\n         console.log(body,'dhdh')\n         // 1.查询用户\n-        // const data = await User.findByIdAndUpdate(userId,body)\n+        const data = await User.findByIdAndUpdate(userId,body)\n+        console.log(data,'d')\n         next()\n     } catch (err) {\n         next(err)\n     }\n"
+                },
+                {
+                    "date": 1663490748794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,13 @@\n         let body = req.body\n         console.log(body,'dhdh')\n         // 1.查询用户\n         const data = await User.findByIdAndUpdate(userId,body)\n-        console.log(data,'d')\n+        res.status(200).json({\n+            code: 200,\n+            msg: \"操作成功\",\n+            data: data\n+        })\n         next()\n     } catch (err) {\n         next(err)\n     }\n"
+                },
+                {
+                    "date": 1663491489574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,11 +84,17 @@\n exports.updateUser = async (req, res, next) => {\n     try {\n         let userId = req.params.id\n         let body = req.body\n-        console.log(body,'dhdh')\n         // 1.查询用户\n         const data = await User.findByIdAndUpdate(userId,body)\n+        if (!data) {\n+           return  res.status(400).json({\n+                code: 400,\n+                msg: \"更新用户失败\",\n+                data: null\n+            })\n+        }\n         res.status(200).json({\n             code: 200,\n             msg: \"操作成功\",\n             data: data\n@@ -99,11 +105,28 @@\n     }\n }\n \n // 删除用户\n-exports.delete = (req, res, next) => {\n+exports.delete = async (req, res, next) => {\n     try {\n-        res.send(\"删除用户\")\n+        const userId = req.params.id\n+        const data = await User.findByIdAndDelete(userId)\n+        if (!data) {\n+            return  res.status(400).json({\n+                 code: 400,\n+                 msg: \"删除用户失败\",\n+                 data: {\n+                    id: userId\n+                 }\n+             })\n+         }\n+         res.status(200).json({\n+             code: 200,\n+             msg: \"操作成功\",\n+             data:  {\n+                id: userId\n+             }\n+         })\n     } catch (err) {\n         next(err)\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1663477358104,
+            "name": "Commit-0",
+            "content": "// 注册用户\nexports.register = (req, res, next) => {\n    try {\n        res.send(\"注册用户\")\n    } catch (err) {\n        next\n    }\n}\n\n// 获取所有用户\nexports.getUserList = (req, res, next) => {\n    try {\n        res.send(\"获取所有用户\")\n    } catch (err) {\n        next\n    }\n}\n\n// 获取指定用户\nexports.getUserById = (req, res, next) => {\n    try {\n        res.send(\"获取指定用户\")\n    } catch (err) {\n        next\n    }\n}\n\n// 编辑/修改指定用户\nexports.update = (req, res, next) => {\n    try {\n        res.send(\"编辑/修改指定用户\")\n    } catch (err) {\n        next\n    }\n}\n\n// 删除用户\nexports.delete = (req, res, next) => {\n    try {\n        res.send(\"删除用户\")\n    } catch (err) {\n        next\n    }\n}"
+        }
+    ]
+}

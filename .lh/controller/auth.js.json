@@ -1,0 +1,46 @@
+{
+    "sourceFile": "controller/auth.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1663484313800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663484323916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n const bcrypt = require(\"bcrypt\")\n \n-\n exports.auth = async (req, res, next) => {\n     try {\n         res.send(\"登陆成功\")\n     } catch (err) {\n"
+                },
+                {
+                    "date": 1663485818282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const bcrypt = require(\"bcrypt\")\n+// const bcrypt = require(\"bcrypt\")\n \n exports.auth = async (req, res, next) => {\n     try {\n         res.send(\"登陆成功\")\n"
+                },
+                {
+                    "date": 1663485901789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n // const bcrypt = require(\"bcrypt\")\n \n-exports.auth = async (req, res, next) => {\n+exports.login = async (req, res, next) => {\n     try {\n         res.send(\"登陆成功\")\n     } catch (err) {\n         next(err)\n"
+                },
+                {
+                    "date": 1663486720047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,37 @@\n-// const bcrypt = require(\"bcrypt\")\n-\n+const bcrypt = require(\"bcrypt\")\n+// 引入用户模块\n+const { User } = require(\"../model/user\")\n exports.login = async (req, res, next) => {\n     try {\n-        res.send(\"登陆成功\")\n+        // 获取到校验后的数据\n+        const validValue = req.validValue\n+\n+        // 1.检测用户是否存在\n+        let user = await User.findOne({ email: validValue.email})\n+        // 2. 如果用户不存在,那就直接返回失败的响应\n+        if (!user) {\n+            return res.status(400).json({\n+                code: 400,\n+                mag: \"用户名或者密码错误\",\n+                data: null\n+            })\n+        }\n+      \n+       let compareResult =  await bcrypt.compare(validValue.password,user.password)\n+        if(!compareResult){\n+            return res.status(400).json({\n+                code: 400,\n+                mag: \"用户名或者密码错误\",\n+                data: null\n+            })\n+        }\n+        \n+        res.status(200).json({\n+            code: 200,\n+            mag: \"登录成功\",\n+            data: null\n+        })\n     } catch (err) {\n         next(err)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663486781468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n         const validValue = req.validValue\n \n         // 1.检测用户是否存在\n         let user = await User.findOne({ email: validValue.email})\n+        console.log(user,'user')\n         // 2. 如果用户不存在,那就直接返回失败的响应\n         if (!user) {\n             return res.status(400).json({\n                 code: 400,\n"
+                },
+                {
+                    "date": 1663486831478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n         // 获取到校验后的数据\n         const validValue = req.validValue\n \n         // 1.检测用户是否存在\n-        let user = await User.findOne({ email: validValue.email})\n+        let user = await User.findOne({ email: validValue.email}).select(\"+password\")\n         console.log(user,'user')\n         // 2. 如果用户不存在,那就直接返回失败的响应\n         if (!user) {\n             return res.status(400).json({\n"
+                },
+                {
+                    "date": 1663487411459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,11 @@\n         \n         res.status(200).json({\n             code: 200,\n             mag: \"登录成功\",\n-            data: null\n+            data: {\n+                token: user.generateToken()\n+            }\n         })\n     } catch (err) {\n         next(err)\n     }\n"
+                }
+            ],
+            "date": 1663484313800,
+            "name": "Commit-0",
+            "content": "const bcrypt = require(\"bcrypt\")\n\n\nexports.auth = async (req, res, next) => {\n    try {\n        res.send(\"登陆成功\")\n    } catch (err) {\n        next(err)\n    }\n}"
+        }
+    ]
+}

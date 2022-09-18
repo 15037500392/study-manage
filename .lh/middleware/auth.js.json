@@ -1,0 +1,22 @@
+{
+    "sourceFile": "middleware/auth.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1663487869870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663488499215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n \n     try {\n         const userData = jwt.verify(token,config.secret)\n         req.userData = userData\n+        console.log(userData,'userData')\n         next()\n     } catch(err) {\n         return res.status(401).json({\n             code: 401,\n"
+                }
+            ],
+            "date": 1663487869870,
+            "name": "Commit-0",
+            "content": "// 引入 jwt\nconst jwt = require(\"jsonwebtoken\")\nconst config = require(\"../config\")\n\nmodule.exports = function(req, res, next){\n    // 前端在请求接口的时候，需要在header,带上我们后端生成的token\n    // 1保存数据（token）\n    const token = req.header(\"authorization\")\n    if (!token) {\n        return res.status(401).json({\n            code: 400,\n            msg:\"请先登录\"\n        })\n    }\n\n    try {\n        const userData = jwt.verify(token,config.secret)\n        req.userData = userData\n        next()\n    } catch(err) {\n        return res.status(401).json({\n            code: 401,\n            msg:\"请先登录\"\n        })\n    }\n}"
+        }
+    ]
+}

@@ -1,0 +1,178 @@
+{
+    "sourceFile": "routes/user.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 40,
+            "patches": [
+                {
+                    "date": 1663462375689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663462402542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,11 @@\n         email: \"ss15037500392@163.com\",\n         name: \"山谣\",\n         password: \"111111\"\n     })\n+    user.save((err) => {\n+        if(err) return console.log(err)\n+    })\n })\n \n // 获取所有用户\n router.get(\"/user\", (req,res,next) =>{\n"
+                },
+                {
+                    "date": 1663462422346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n         password: \"111111\"\n     })\n     user.save((err) => {\n         if(err) return console.log(err)\n+        console.log(\"注册成功\")\n     })\n })\n \n // 获取所有用户\n"
+                },
+                {
+                    "date": 1663462707753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n // 注册用户\n router.post(\"/user\", (req,res,next) =>{\n     res.send(\"注册用户\")\n     const user = new User({\n-        email: \"ss15037500392@163.com\",\n+        email: \"15037500392@163.com\",\n         name: \"山谣\",\n         password: \"111111\"\n     })\n     user.save((err) => {\n"
+                },
+                {
+                    "date": 1663462758791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,17 @@\n const router = require(\"express\").Router()\n \n //引入 User 模型\n-const { user, User} = require(\"../model/user\")\n+const { User } = require(\"../model/user\")\n // 注册用户\n router.post(\"/user\", (req,res,next) =>{\n     res.send(\"注册用户\")\n     const user = new User({\n         email: \"15037500392@163.com\",\n         name: \"山谣\",\n         password: \"111111\"\n     })\n-    user.save((err) => {\n+    User.save((err) => {\n         if(err) return console.log(err)\n         console.log(\"注册成功\")\n     })\n })\n"
+                },
+                {
+                    "date": 1663462790285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n // 注册用户\n router.post(\"/user\", (req,res,next) =>{\n     res.send(\"注册用户\")\n     const user = new User({\n-        email: \"15037500392@163.com\",\n+        email: \"2497261202@163.com\",\n         name: \"山谣\",\n         password: \"111111\"\n     })\n     User.save((err) => {\n"
+                },
+                {
+                    "date": 1663462860311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n         email: \"2497261202@163.com\",\n         name: \"山谣\",\n         password: \"111111\"\n     })\n-    User.save((err) => {\n+    user.save((err) => {\n         if(err) return console.log(err)\n         console.log(\"注册成功\")\n     })\n })\n"
+                },
+                {
+                    "date": 1663463028790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,10 @@\n })\n \n // 获取所有用户\n router.get(\"/user\", (req,res,next) =>{\n-    res.send(\"获取所有用户\")\n+    const data = await User.find()\n+    res.send(data)\n })\n \n \n // 获取指定用户\n"
+                },
+                {
+                    "date": 1663463216680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,20 +2,20 @@\n \n //引入 User 模型\n const { User } = require(\"../model/user\")\n // 注册用户\n-router.post(\"/user\", (req,res,next) =>{\n-    res.send(\"注册用户\")\n-    const user = new User({\n-        email: \"2497261202@163.com\",\n-        name: \"山谣\",\n-        password: \"111111\"\n-    })\n-    user.save((err) => {\n-        if(err) return console.log(err)\n-        console.log(\"注册成功\")\n-    })\n-})\n+// router.post(\"/user\", (req,res,next) =>{\n+//     res.send(\"注册用户\")\n+//     const user = new User({\n+//         email: \"2497261202@163.com\",\n+//         name: \"山谣\",\n+//         password: \"111111\"\n+//     })\n+//     user.save((err) => {\n+//         if(err) return console.log(err)\n+//         console.log(\"注册成功\")\n+//     })\n+// })\n \n // 获取所有用户\n router.get(\"/user\", (req,res,next) =>{\n     const data = await User.find()\n"
+                },
+                {
+                    "date": 1663463251444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n //     })\n // })\n \n // 获取所有用户\n-router.get(\"/user\", (req,res,next) =>{\n+router.get(\"/user\", async (req,res,next) =>{\n     const data = await User.find()\n     res.send(data)\n })\n \n"
+                },
+                {
+                    "date": 1663463258442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,20 +2,20 @@\n \n //引入 User 模型\n const { User } = require(\"../model/user\")\n // 注册用户\n-// router.post(\"/user\", (req,res,next) =>{\n-//     res.send(\"注册用户\")\n-//     const user = new User({\n-//         email: \"2497261202@163.com\",\n-//         name: \"山谣\",\n-//         password: \"111111\"\n-//     })\n-//     user.save((err) => {\n-//         if(err) return console.log(err)\n-//         console.log(\"注册成功\")\n-//     })\n-// })\n+router.post(\"/user\", (req,res,next) =>{\n+    res.send(\"注册用户\")\n+    const user = new User({\n+        email: \"2497261202@163.com\",\n+        name: \"山谣\",\n+        password: \"111111\"\n+    })\n+    user.save((err) => {\n+        if(err) return console.log(err)\n+        console.log(\"注册成功\")\n+    })\n+})\n \n // 获取所有用户\n router.get(\"/user\", async (req,res,next) =>{\n     const data = await User.find()\n"
+                },
+                {
+                    "date": 1663464396031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,18 +3,9 @@\n //引入 User 模型\n const { User } = require(\"../model/user\")\n // 注册用户\n router.post(\"/user\", (req,res,next) =>{\n-    res.send(\"注册用户\")\n-    const user = new User({\n-        email: \"2497261202@163.com\",\n-        name: \"山谣\",\n-        password: \"111111\"\n-    })\n-    user.save((err) => {\n-        if(err) return console.log(err)\n-        console.log(\"注册成功\")\n-    })\n+    \n })\n \n // 获取所有用户\n router.get(\"/user\", async (req,res,next) =>{\n"
+                },
+                {
+                    "date": 1663464789311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,12 @@\n const router = require(\"express\").Router()\n \n //引入 User 模型\n-const { User } = require(\"../model/user\")\n+const { User, userValidator } = require(\"../model/user\")\n+\n // 注册用户\n router.post(\"/user\", (req,res,next) =>{\n-    \n+    console.log(userValidator(req.body))\n })\n \n // 获取所有用户\n router.get(\"/user\", async (req,res,next) =>{\n"
+                },
+                {
+                    "date": 1663465045078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n \n // 注册用户\n router.post(\"/user\", (req,res,next) =>{\n     console.log(userValidator(req.body))\n+    res.send('ok')\n })\n \n // 获取所有用户\n router.get(\"/user\", async (req,res,next) =>{\n"
+                },
+                {
+                    "date": 1663466154140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,12 @@\n const router = require(\"express\").Router()\n \n //引入 User 模型\n const { User, userValidator } = require(\"../model/user\")\n+const  validator = require(\"../middleware/validate\")\n \n // 注册用户\n-router.post(\"/user\", (req,res,next) =>{\n+router.post(\"/user\",validator(userValidator), (req,res,next) =>{\n     console.log(userValidator(req.body))\n     res.send('ok')\n })\n \n"
+                },
+                {
+                    "date": 1663466173885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n const  validator = require(\"../middleware/validate\")\n \n // 注册用户\n router.post(\"/user\",validator(userValidator), (req,res,next) =>{\n-    console.log(userValidator(req.body))\n+    console.log(req.validValue)\n     res.send('ok')\n })\n \n // 获取所有用户\n"
+                },
+                {
+                    "date": 1663466192466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n const  validator = require(\"../middleware/validate\")\n \n // 注册用户\n router.post(\"/user\",validator(userValidator), (req,res,next) =>{\n-    console.log(req.validValue)\n+    console.log(req.validValue,'ss')\n     res.send('ok')\n })\n \n // 获取所有用户\n"
+                },
+                {
+                    "date": 1663466228209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n const  validator = require(\"../middleware/validate\")\n \n // 注册用户\n router.post(\"/user\",validator(userValidator), (req,res,next) =>{\n-    console.log(req.validValue,'ss')\n     res.send('ok')\n })\n \n // 获取所有用户\n"
+                },
+                {
+                    "date": 1663477498134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,34 +3,25 @@\n //引入 User 模型\n const { User, userValidator } = require(\"../model/user\")\n const  validator = require(\"../middleware/validate\")\n \n+const user = require(\"../controller/user\")\n+\n // 注册用户\n-router.post(\"/user\",validator(userValidator), (req,res,next) =>{\n-    res.send('ok')\n-})\n+router.post(\"/user\",validator(userValidator), user.register)\n \n // 获取所有用户\n-router.get(\"/user\", async (req,res,next) =>{\n-    const data = await User.find()\n-    res.send(data)\n-})\n+router.get(\"/user\", user.getUserList)\n \n \n // 获取指定用户\n-router.get(\"/user/:id\", (req,res,next) =>{\n-    res.send(\"获取指定用户\")\n-})\n+router.get(\"/user/:id\", user.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/user/:id\", (req,res,next) =>{\n-    res.send(\"编辑/修改指定用户\")\n-})\n+router.put(\"/user/:id\", validator(userValidator), user.update)\n \n \n // 删除用户\n-router.delete(\"/user/:id\", (req,res,next) =>{\n-    res.send(\"删除用户\")\n-})\n+router.delete(\"/user/:id\", user.delete)\n \n module.exports = router\n"
+                },
+                {
+                    "date": 1663477759859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,25 +3,25 @@\n //引入 User 模型\n const { User, userValidator } = require(\"../model/user\")\n const  validator = require(\"../middleware/validate\")\n \n-const user = require(\"../controller/user\")\n+const userController = require(\"../controller/user\")\n \n // 注册用户\n router.post(\"/user\",validator(userValidator), user.register)\n \n // 获取所有用户\n-router.get(\"/user\", user.getUserList)\n+router.get(\"/user\", userController.getUserList)\n \n \n // 获取指定用户\n-router.get(\"/user/:id\", user.getUserById)\n+router.get(\"/user/:id\", userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/user/:id\", validator(userValidator), user.update)\n+router.put(\"/user/:id\", validator(userValidator), userController.update)\n \n \n // 删除用户\n-router.delete(\"/user/:id\", user.delete)\n+router.delete(\"/user/:id\", userController.delete)\n \n module.exports = router\n"
+                },
+                {
+                    "date": 1663477788448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n const userController = require(\"../controller/user\")\n \n // 注册用户\n-router.post(\"/user\",validator(userValidator), user.register)\n+router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n router.get(\"/user\", userController.getUserList)\n \n"
+                },
+                {
+                    "date": 1663477983246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", userController.getUserList)\n+router.get(\"/users\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478056751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/users\", userController.getUserList)\n+router.get(\"/user\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478262158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", userController.getUserList)\n+router.get(\"/all-user\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478281447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/all-user\", userController.getUserList)\n+router.get(\"/all\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478318882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/all\", userController.getUserList)\n+router.get(\"/user\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478712008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", userController.getUserList)\n+router.get(\"/\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478794099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/\", userController.getUserList)\n+router.get(\"/user\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478832393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,11 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", userController.getUserList)\n+router.get(\"/user\", (res,req,next)=>{\n+    res.setEncoding('a')\n+})\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663478858821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", (res,req,next)=>{\n-    res.setEncoding('a')\n-})\n+router.get(\"/user\", userController.getUserList())\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663479037764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", userController.getUserList())\n+router.get(\"/user\", userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663487988302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,13 +5,15 @@\n const  validator = require(\"../middleware/validate\")\n \n const userController = require(\"../controller/user\")\n \n+const auth = require(\"../middleware/auth\")\n+\n // 注册用户\n router.post(\"/user\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", userController.getUserList)\n+router.get(\"/user\", auth,userController.getUserList)\n \n \n // 获取指定用户\n router.get(\"/user/:id\", userController.getUserById)\n"
+                },
+                {
+                    "date": 1663488060385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,20 +8,20 @@\n \n const auth = require(\"../middleware/auth\")\n \n // 注册用户\n-router.post(\"/user\",validator(userValidator), userController.register)\n+router.post(\"/\",validator(userValidator), userController.register)\n \n // 获取所有用户\n-router.get(\"/user\", auth,userController.getUserList)\n+router.get(\"/\", auth,userController.getUserList)\n \n \n // 获取指定用户\n-router.get(\"/user/:id\", userController.getUserById)\n+router.get(\"/:id\", userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/user/:id\", validator(userValidator), userController.update)\n+router.put(\"/:id\", validator(userValidator), userController.update)\n \n \n // 删除用户\n router.delete(\"/user/:id\", userController.delete)\n"
+                },
+                {
+                    "date": 1663488964414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,15 +15,15 @@\n router.get(\"/\", auth,userController.getUserList)\n \n \n // 获取指定用户\n-router.get(\"/:id\", userController.getUserById)\n+router.get(\"/:id\",auth, userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/:id\", validator(userValidator), userController.update)\n+router.put(\"/:id\", auth,validator(userValidator), userController.update)\n \n \n // 删除用户\n-router.delete(\"/user/:id\", userController.delete)\n+router.delete(\"/user/:id\", auth,userController.delete)\n \n module.exports = router\n"
+                },
+                {
+                    "date": 1663488973344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,7 +23,7 @@\n router.put(\"/:id\", auth,validator(userValidator), userController.update)\n \n \n // 删除用户\n-router.delete(\"/user/:id\", auth,userController.delete)\n+router.delete(\"/user/:id\", auth, userController.delete)\n \n module.exports = router\n"
+                },
+                {
+                    "date": 1663490292512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n router.get(\"/:id\",auth, userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/:id\", auth,validator(userValidator), userController.update)\n+router.put(\"/:id\", [ auth,validator(userValidator)], userController.update)\n \n \n // 删除用户\n router.delete(\"/user/:id\", auth, userController.delete)\n"
+                },
+                {
+                    "date": 1663490321868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n router.get(\"/:id\",auth, userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/:id\", [ auth,validator(userValidator)], userController.update)\n+router.put(\"/:id\",auth, userController.update)\n \n \n // 删除用户\n router.delete(\"/user/:id\", auth, userController.delete)\n"
+                },
+                {
+                    "date": 1663490474853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n router.get(\"/:id\",auth, userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/:id\",auth, userController.update)\n+router.put(\"/:id\", [auth,validator(userValidator)], userController.update)\n \n \n // 删除用户\n router.delete(\"/user/:id\", auth, userController.delete)\n"
+                },
+                {
+                    "date": 1663490580327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,7 +23,7 @@\n router.put(\"/:id\", [auth,validator(userValidator)], userController.update)\n \n \n // 删除用户\n-router.delete(\"/user/:id\", auth, userController.delete)\n+router.delete(\"/:id\", auth, userController.delete)\n \n module.exports = router\n"
+                },
+                {
+                    "date": 1663490635744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n router.get(\"/:id\",auth, userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/:id\", [auth,validator(userValidator)], userController.update)\n+router.put(\"/:id\", [auth,validator(userValidator)], userController.updateUser)\n \n \n // 删除用户\n router.delete(\"/:id\", auth, userController.delete)\n"
+                },
+                {
+                    "date": 1663491915580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n const router = require(\"express\").Router()\n \n //引入 User 模型\n-const { User, userValidator } = require(\"../model/user\")\n+const { User, userValidator,updateValidator } = require(\"../model/user\")\n const  validator = require(\"../middleware/validate\")\n \n const userController = require(\"../controller/user\")\n \n@@ -19,9 +19,9 @@\n router.get(\"/:id\",auth, userController.getUserById)\n \n \n // 编辑/修改指定用户\n-router.put(\"/:id\", [auth,validator(userValidator)], userController.updateUser)\n+router.put(\"/:id\", [auth,validator(updateValidator)], userController.updateUser)\n \n \n // 删除用户\n router.delete(\"/:id\", auth, userController.delete)\n"
+                }
+            ],
+            "date": 1663462375689,
+            "name": "Commit-0",
+            "content": "const router = require(\"express\").Router()\n\n//引入 User 模型\nconst { user, User} = require(\"../model/user\")\n// 注册用户\nrouter.post(\"/user\", (req,res,next) =>{\n    res.send(\"注册用户\")\n    const user = new User({\n        email: \"ss15037500392@163.com\",\n        name: \"山谣\",\n        password: \"111111\"\n    })\n})\n\n// 获取所有用户\nrouter.get(\"/user\", (req,res,next) =>{\n    res.send(\"获取所有用户\")\n})\n\n\n// 获取指定用户\nrouter.get(\"/user/:id\", (req,res,next) =>{\n    res.send(\"获取指定用户\")\n})\n\n\n// 编辑/修改指定用户\nrouter.put(\"/user/:id\", (req,res,next) =>{\n    res.send(\"编辑/修改指定用户\")\n})\n\n\n// 删除用户\nrouter.delete(\"/user/:id\", (req,res,next) =>{\n    res.send(\"删除用户\")\n})\n\nmodule.exports = router\n"
+        }
+    ]
+}

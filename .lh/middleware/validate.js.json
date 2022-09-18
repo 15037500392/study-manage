@@ -1,0 +1,22 @@
+{
+    "sourceFile": "middleware/validate.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1663465911785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663466054737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,6 +10,7 @@\n             })\n         }\n \n         req.validValue = value\n+        next()\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1663465911785,
+            "name": "Commit-0",
+            "content": "module.exports = ( validator ) => {\n    return ( req, res, next ) => {\n        const { error, value } = validator(req.body)\n        console.log(error)\n        if(error){\n            return res.status(400).json({\n                code: 400,\n                value: error._original,\n                msg: error.details[0].message\n            })\n        }\n\n        req.validValue = value\n    }\n}"
+        }
+    ]
+}

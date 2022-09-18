@@ -1,0 +1,30 @@
+{
+    "sourceFile": "routes/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1663480615521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663480621122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const router = require(\"express\").Router()\n \n // 用户接口\n-router.use(\"user\".require(\"./user\"))\n+router.use(\"user\",require(\"./user\"))\n router.use(\"login\",require(\"./auth\"))\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663485842012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const router = require(\"express\").Router()\n \n // 用户接口\n router.use(\"user\",require(\"./user\"))\n-router.use(\"login\",require(\"./auth\"))\n+router.use(\"auth\",require(\"./auth\"))\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663485928161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const router = require(\"express\").Router()\n \n // 用户接口\n-router.use(\"user\",require(\"./user\"))\n-router.use(\"auth\",require(\"./auth\"))\n+router.use(\"/user\",require(\"./user\"))\n+router.use(\"/auth\",require(\"./auth\"))\n module.exports = router\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1663480615521,
+            "name": "Commit-0",
+            "content": "const router = require(\"express\").Router()\n\n// 用户接口\nrouter.use(\"user\".require(\"./user\"))\nrouter.use(\"login\",require(\"./auth\"))\nmodule.exports = router"
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "sourceFile": "routes/auth.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1663480800239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663481244756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n const router = require(\"express\").Router()\n const autoController = require(\"../controller/user\")\n-router.post(\"login\",autoController.login)\n+router.post(\"auto\",autoController.login)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663481256317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n const router = require(\"express\").Router()\n const autoController = require(\"../controller/user\")\n-router.post(\"auto\",autoController.login)\n+router.post(\"auto\",autoController.auto)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663481286585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n const router = require(\"express\").Router()\n-const autoController = require(\"../controller/user\")\n+const autoController = require(\"../controller/auto\") \n+\n router.post(\"auto\",autoController.auto)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663484155939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const router = require(\"express\").Router()\n const autoController = require(\"../controller/auto\") \n+const validator = require(\"../controller/auth\")\n+router.post(\"auto\",autoController.auth)\n \n-router.post(\"auto\",autoController.auto)\n-\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663484162502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n const router = require(\"express\").Router()\n+\n const autoController = require(\"../controller/auto\") \n-const validator = require(\"../controller/auth\")\n+\n router.post(\"auto\",autoController.auth)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663484305663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n const router = require(\"express\").Router()\n+const validator = require(\"../controller/auth\")\n+const autoController = require(\"../controller/auth\") \n+const { userValidator } = require(\"../model/user\")\n \n-const autoController = require(\"../controller/auto\") \n+router.post(\"auto\", validator(userValidator),autoController.auth)\n \n-router.post(\"auto\",autoController.auth)\n-\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663484311374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n const validator = require(\"../controller/auth\")\n const autoController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"auto\", validator(userValidator),autoController.auth)\n+router.post(\"auto\", validator(userValidator), autoController.auth)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663484346735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const router = require(\"express\").Router()\n-const validator = require(\"../controller/auth\")\n+const validator = require(\"../middleware/validate\")\n const autoController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n router.post(\"auto\", validator(userValidator), autoController.auth)\n"
+                },
+                {
+                    "date": 1663485769562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n const validator = require(\"../middleware/validate\")\n const autoController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"auto\", validator(userValidator), autoController.auth)\n+router.post(\"/\", validator(userValidator), autoController.auth)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663485793135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n const router = require(\"express\").Router()\n const validator = require(\"../middleware/validate\")\n-const autoController = require(\"../controller/auth\") \n+const authController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"/\", validator(userValidator), autoController.auth)\n+router.post(\"/\", validator(userValidator), authController.auth)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663485893627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n const validator = require(\"../middleware/validate\")\n const authController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"/\", validator(userValidator), authController.auth)\n+router.post(\"/\", validator(userValidator), authController.login)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663485990815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,9 @@\n const validator = require(\"../middleware/validate\")\n const authController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"/\", validator(userValidator), authController.login)\n+router.post(\"/\", validator(userValidator), (req,res,next)=>{\n+    res.send('de')\n+})\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663486025908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n const validator = require(\"../middleware/validate\")\n const authController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"/\", validator(userValidator), (req,res,next)=>{\n+router.post(\"/\", (req,res,next)=>{\n     res.send('de')\n })\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663486088659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,7 @@\n const validator = require(\"../middleware/validate\")\n const authController = require(\"../controller/auth\") \n const { userValidator } = require(\"../model/user\")\n \n-router.post(\"/\", (req,res,next)=>{\n-    res.send('de')\n-})\n+router.post(\"/\", validator(userValidator), authController.login)\n \n module.exports = router\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1663480800239,
+            "name": "Commit-0",
+            "content": "const router = require(\"express\").Router()\nconst autoController = require(\"../controller/user\")\nrouter.post(\"login\",autoController.login)\n\nmodule.exports = router"
+        }
+    ]
+}
