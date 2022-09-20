@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1663480615521,
@@ -20,6 +20,14 @@
                 {
                     "date": 1663485928161,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const router = require(\"express\").Router()\n \n // 用户接口\n-router.use(\"user\",require(\"./user\"))\n-router.use(\"auth\",require(\"./auth\"))\n+router.use(\"/user\",require(\"./user\"))\n+router.use(\"/auth\",require(\"./auth\"))\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663507948322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,12 @@\n const router = require(\"express\").Router()\n \n // 用户接口\n router.use(\"/user\",require(\"./user\"))\n+\n+// 登录\n router.use(\"/auth\",require(\"./auth\"))\n+\n+// 上传\n+router.use(\"/upload\", require(\"./uploade\"))\n+\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663508027902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,7 @@\n // 登录\n router.use(\"/auth\",require(\"./auth\"))\n \n // 上传\n-router.use(\"/upload\", require(\"./uploade\"))\n+router.use(\"/upload\", require(\"./upload\"))\n \n module.exports = router\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1663480615521,

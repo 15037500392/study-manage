@@ -1,0 +1,46 @@
+{
+    "sourceFile": "controller/upload.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1663508115179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663508133164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n         // res.status(200).json({\n         //     code: 200,\n         //     msg: \"操作成功\",\n         //     data: userList\n-    })\n+        //  })\n     } catch (err) {\n         next(err)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663680554886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n exports.uploadSingleFile =  (req, res, next) => {\n     try {\n+        console.log(req,'reqq')\n         res.send('ok')\n         // let userList = await User.find()\n         // res.status(200).json({\n         //     code: 200,\n"
+                },
+                {
+                    "date": 1663680628377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,13 @@\n     try {\n         console.log(req,'reqq')\n         res.send('ok')\n         // let userList = await User.find()\n-        // res.status(200).json({\n-        //     code: 200,\n-        //     msg: \"操作成功\",\n-        //     data: userList\n-        //  })\n+        res.status(200).json({\n+            code: 200,\n+            msg: \"操作成功\",\n+            data: \"http://localhost:3000/\" + \"upload/\" +req.file.originalname\n+         })\n     } catch (err) {\n         next(err)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663680652788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n         // let userList = await User.find()\n         res.status(200).json({\n             code: 200,\n             msg: \"操作成功\",\n-            data: \"http://localhost:3000/\" + \"upload/\" +req.file.originalname\n+            data: `http://localhost:3000/upload/${req.file.originalname}`\n          })\n     } catch (err) {\n         next(err)\n     }\n"
+                },
+                {
+                    "date": 1663680700839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n         // let userList = await User.find()\n         res.status(200).json({\n             code: 200,\n             msg: \"操作成功\",\n-            data: `http://localhost:3000/upload/${req.file.originalname}`\n+            data: \"http://localhost:3000/\" +\"upload/\" + req.file.originalname\n          })\n     } catch (err) {\n         next(err)\n     }\n"
+                },
+                {
+                    "date": 1663680738442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n         // let userList = await User.find()\n         res.status(200).json({\n             code: 200,\n             msg: \"操作成功\",\n-            data: \"http://localhost:3000/\" +\"upload/\" + req.file.originalname\n+            data: req.file.originalname\n          })\n     } catch (err) {\n         next(err)\n     }\n"
+                },
+                {
+                    "date": 1663680789837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n exports.uploadSingleFile =  (req, res, next) => {\n     try {\n-        console.log(req,'reqq')\n-        res.send('ok')\n+        // console.log(req,'reqq')\n+        // res.send('ok')\n         // let userList = await User.find()\n         res.status(200).json({\n             code: 200,\n             msg: \"操作成功\",\n-            data: req.file.originalname\n+            data: \"http://localhost:3000/\" +\"upload/\" + req.file.originalname\n          })\n     } catch (err) {\n         next(err)\n     }\n"
+                }
+            ],
+            "date": 1663508115179,
+            "name": "Commit-0",
+            "content": "exports.uploadSingleFile =  (req, res, next) => {\n    try {\n        res.send('ok')\n        // let userList = await User.find()\n        // res.status(200).json({\n        //     code: 200,\n        //     msg: \"操作成功\",\n        //     data: userList\n    })\n    } catch (err) {\n        next(err)\n    }\n}"
+        }
+    ]
+}

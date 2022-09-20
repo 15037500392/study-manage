@@ -14,6 +14,9 @@ app.use(cors())
 // 处理日志
 app.use(morgan("dev"))
 
+// 静态资源托管
+app.use(express.static("public"))
+
 // 引入数据库
 require("./model")
 // 引入路由中间件

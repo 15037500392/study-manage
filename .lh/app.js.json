@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1663478532343,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663680858174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n app.use(cors())\n // 处理日志\n app.use(morgan(\"dev\"))\n \n+// 静态资源托管\n+app.use(express.static(\"public\"))\n+\n // 引入数据库\n require(\"./model\")\n // 引入路由中间件\n app.use(\"/api\",require(\"./routes\"))\n"
                 }
             ],
             "date": 1663478532343,

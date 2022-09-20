@@ -1,0 +1,42 @@
+{
+    "sourceFile": "routes/upload.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1663508185800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1663508389920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,11 @@\n const router = require(\"express\").Router()\n \n const uploadController = require(\"../controller/upload.js\")\n \n-router.post(\"/\",uploadController.uploadSingleFile)\n+// 引入 multer 进行文件上传\n+const multer  = require('multer')\n+const upload = multer({ dest: 'public/upload' })\n \n+router.post(\"/\",upload.single('file'),uploadController.uploadSingleFile)\n+\n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663508801263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const uploadController = require(\"../controller/upload.js\")\n \n // 引入 multer 进行文件上传\n const multer  = require('multer')\n-const upload = multer({ dest: 'public/upload' })\n+const upload = multer({ dest: 'public/upload/' })\n \n router.post(\"/\",upload.single('file'),uploadController.uploadSingleFile)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663680335397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,20 @@\n const uploadController = require(\"../controller/upload.js\")\n \n // 引入 multer 进行文件上传\n const multer  = require('multer')\n-const upload = multer({ dest: 'public/upload/' })\n+const storage = multer.diskStorage({\n+    destination: function (req, file, cb) {\n+      cb(null, '/public/upload')\n+    },\n+    filename: function (req, file, cb) {\n+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)\n+      cb(null, file.fieldname + '-' + uniqueSuffix)\n+    }\n+  })\n+  \n+const upload = multer({ storage: storage })\n \n+\n router.post(\"/\",upload.single('file'),uploadController.uploadSingleFile)\n \n module.exports = router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1663680385171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n // 引入 multer 进行文件上传\n const multer  = require('multer')\n const storage = multer.diskStorage({\n     destination: function (req, file, cb) {\n-      cb(null, '/public/upload')\n+      cb(null, 'public/upload')\n     },\n     filename: function (req, file, cb) {\n       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)\n       cb(null, file.fieldname + '-' + uniqueSuffix)\n"
+                },
+                {
+                    "date": 1663680440459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n     destination: function (req, file, cb) {\n       cb(null, 'public/upload')\n     },\n     filename: function (req, file, cb) {\n+        console.log(file)\n       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)\n       cb(null, file.fieldname + '-' + uniqueSuffix)\n     }\n   })\n"
+                },
+                {
+                    "date": 1663680472853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,9 @@\n     destination: function (req, file, cb) {\n       cb(null, 'public/upload')\n     },\n     filename: function (req, file, cb) {\n-        console.log(file)\n-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)\n-      cb(null, file.fieldname + '-' + uniqueSuffix)\n+      cb(null, file.originalname)\n     }\n   })\n   \n const upload = multer({ storage: storage })\n"
+                }
+            ],
+            "date": 1663508185800,
+            "name": "Commit-0",
+            "content": "const router = require(\"express\").Router()\n\nconst uploadController = require(\"../controller/upload.js\")\n\nrouter.post(\"/\",uploadController.uploadSingleFile)\n\nmodule.exports = router"
+        }
+    ]
+}
